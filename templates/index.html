@@ -55,5 +55,27 @@
     <h2>Steps:</h2>
     <pre class="steps">{{ steps | join('\n') }}</pre>
     {% endif %}
+
+    
+    <script>
+        async function submitForm(event) {
+          event.preventDefault();
+      
+          let key = document.querySelector('input[name="key"]').value;
+          let message = document.querySelector('input[name="message"]').value;
+          let action = document.querySelector('select[name="action"]').value;
+      
+          let response = await fetch("https://hill-cipher.onrender.com/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key: key, message: message, action: action }),
+          });
+      
+          let data = await response.json();
+          document.getElementById("result").innerText = "Result: " + data.result;
+          document.getElementById("steps").innerHTML = data.steps.map(s => `<li>${s}</li>`).join("");
+        }
+      </script>
+      
 </body>
 </html>
