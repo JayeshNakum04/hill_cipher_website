@@ -33,6 +33,9 @@
         .error {
             color: red;
         }
+        .steps {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -56,8 +59,10 @@
     {% if result %}
     <h2>Result:</h2>
     <p>{{ result }}</p>
-    <h2>Steps:</h2>
-    <pre>{{ steps }}</pre>
+    <div class="steps">
+        <h2>Steps:</h2>
+        <pre>{{ steps | join('\n') }}</pre>
+    </div>
     {% endif %}
 
     {% if error %}
