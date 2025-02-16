@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 10px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hill Cipher Encryption and Decryption</h1>
+    <form method="POST">
+        <label for="key">Key (e.g., [[6, 24], [13, 16]]):</label>
+        <input type="text" id="key" name="key" required>
+        <br>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" required>
+        <br>
+        <label for="action">Action:</label>
+        <select id="action" name="action">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+    <h2>Result:</h2>
+    <p>{{ result }}</p>
+    <h2>Steps:</h2>
+    <pre>{{ steps }}</pre>
+    {% endif %}
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
