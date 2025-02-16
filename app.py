@@ -1,27 +1,56 @@
 from flask import Flask, render_template, request
 import numpy as np
-from hill_cipher import encrypt, decrypt, is_valid_key
+import random
+from hill_cipher import encrypt, decrypt, is_valid_key, generate_valid_key
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    key = ""
+    message = ""
+    action = "encrypt"
+    result = ""
+    steps = []
+    error = ""
+    show_key_prompt = False
+    
     if request.method == 'POST':
+          
+        message = request.form['message'].upper()
+        action = request.form['action']
+        
+        # Key processing
+        key_input = request.form.get('key', '')  # Use '' if key is missing
         try:
-            key = eval(request.form['key'])  # Convert string input to list
-            message = request.form['message']
-            action = request.form['action']
-
-            if action == 'encrypt':
+            key = eval(key_input)  # Convert string to list
+            if not isinstance(key, list) or not all(isinstance(row, list) for row in key):
+                raise ValueError
+        except:
+            error = "Invalid key format. Please enter a square matrix (e.g., [[6,24,1],[1,13,16],[12,17,21]])"
+            return render_template('index.html', key=key_input, message=message, action=action, error=error)
+        
+        n = len(key)
+        
+        if action == "encrypt":
+            if is_valid_key(key):
                 result, steps = encrypt(message, key)
-            elif action == 'decrypt':
-                if not is_valid_key(key):
-                    return render_template('index.html', error="Invalid key for decryption. Please provide a valid key.")
+            else:
+                error = "Invalid key matrix. Determinant is not invertible under mod 26."
+                show_key_prompt = True
+        elif action == "decrypt":
+            if is_valid_key(key):
                 result, steps = decrypt(message, key)
-            return render_template('index.html', result=result, steps=steps)
-        except Exception as e:
-            return render_template('index.html', error=f"An error occurred: {str(e)}")
-    return render_template('index.html')
+            else:
+                error = "Invalid key matrix. Determinant is not invertible under mod 26."
+                show_key_prompt = True
+        
+        if 'generate_new' in request.form:
+            key = generate_valid_key(n)
+            error = "Generated a valid key matrix: " + str(key)
+            show_key_prompt = False
+        
+    return render_template('index.html', key=str(key), message=message, action=action, result=result, steps=steps, error=error, show_key_prompt=show_key_prompt)
 
 if __name__ == '__main__':
     app.run(debug=True)
