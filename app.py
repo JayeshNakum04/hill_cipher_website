@@ -5,7 +5,7 @@ from hill_cipher import encrypt, decrypt, is_valid_key, generate_valid_key
 
 app = Flask(__name__)
 
-@app.route("/", methods=["POST"])
+@app.route('/', methods=['GET', 'POST'])
 def process():
     data = request.json
     message = data.get("message", "").upper()
