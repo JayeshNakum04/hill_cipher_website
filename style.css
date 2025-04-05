@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+h1, h2, h3 {
+    color: #2c3e50;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #2980b9;
+}
+.matrix-input {
+    width: 40px;
+    text-align: center;
+    margin: 2px;
+}
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e8f4fd;
+    border-radius: 5px;
+    border-left: 5px solid #3498db;
+}
+.steps {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff8dc;
+    border-radius: 5px;
+    border-left: 5px solid #f1c40f;
+}
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+}
+.success {
+    color: #27ae60;
+    font-weight: bold;
+}
+.math-symbol {
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: bold;
+}
+.info-section {
+    background-color: #eafaf1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+table.step-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
+table.step-table td, table.step-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+table.step-table th {
+    background-color: #f2f2f2;
+}
+.matrix-display {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: #f9f9f9;
+    margin: 5px 0;
+}
+.tabs {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    border-radius: 5px 5px 0 0;
+}
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: #333;
+}
+.tabs button:hover {
+    background-color: #ddd;
+}
+.tabs button.active {
+    background-color: #3498db;
+    color: white;
+}
+.tab-content {
+    display: none;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+.show {
+    display: block;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+}
