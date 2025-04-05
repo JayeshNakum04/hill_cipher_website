@@ -1,1 +1,112 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher Learning Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hill Cipher Learning Tool</h1>
+        
+        <div class="info-section">
+            <h3>About Hill Cipher</h3>
+            <p>The Hill cipher is a polygraphic substitution cipher based on linear algebra, invented by Lester S. Hill in 1929. It operates on blocks of letters (typically 2 or 3 at a time) and uses matrix multiplication for encryption and matrix inversion for decryption.</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'encrypt-decrypt')">Encrypt/Decrypt</button>
+            <button class="tab-button" onclick="openTab(event, 'theory')">Hill Cipher Theory</button>
+        </div>
+
+        <div id="encrypt-decrypt" class="tab-content show">
+            <form id="hill-cipher-form">
+                <div class="form-group">
+                    <label for="operation">Operation:</label>
+                    <select id="operation" required>
+                        <option value="encrypt">Encrypt</option>
+                        <option value="decrypt">Decrypt</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="matrix-size">Key Matrix Size:</label>
+                    <select id="matrix-size" onchange="generateMatrixInputs()" required>
+                        <option value="2">2x2</option>
+                        <option value="3">3x3</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="key-matrix">Key Matrix:</label>
+                    <div id="matrix-inputs"></div>
+                    <button type="button" onclick="generateRandomMatrix()">Generate Random Matrix</button>
+                    <button type="button" id="check-invertible" onclick="checkMatrixInvertibility()">Check If Matrix Is Valid</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" rows="3" placeholder="Enter message to encrypt/decrypt" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modulus">Modulus (usually 26 for English alphabet):</label>
+                    <input type="number" id="modulus" value="26" min="2" required>
+                </div>
+                
+                <button type="button" onclick="processHillCipher()">Process</button>
+            </form>
+            
+            <div id="result" class="result" style="display: none;"></div>
+            <div id="steps" class="steps" style="display: none;"></div>
+        </div>
+
+        <div id="theory" class="tab-content">
+            <h2>Hill Cipher Theory</h2>
+            
+            <h3>The Basics</h3>
+            <p>Hill cipher uses matrices and modular arithmetic to transform plaintext into ciphertext.</p>
+            
+            <h3>Encryption Process</h3>
+            <ol>
+                <li>Convert the plaintext letters to numbers (A=0, B=1, ..., Z=25)</li>
+                <li>Divide the plaintext into blocks equal to the key matrix dimension</li>
+                <li>Multiply each block by the key matrix</li>
+                <li>Take modulo 26 of each resulting value</li>
+                <li>Convert the numbers back to letters</li>
+            </ol>
+            
+            <h3>Decryption Process</h3>
+            <ol>
+                <li>Find the inverse of the key matrix modulo 26</li>
+                <li>Convert the ciphertext letters to numbers</li>
+                <li>Multiply each block by the inverse key matrix</li>
+                <li>Take modulo 26 of each result</li>
+                <li>Convert the numbers back to letters</li>
+            </ol>
+            
+            <h3>Mathematical Representation</h3>
+            <p>For encryption: C = KP (mod 26)<br>For decryption: P = K<sup>-1</sup>C (mod 26)</p>
+            <p>Where:<br>P = Plaintext vector<br>C = Ciphertext vector<br>K = Key matrix<br>K<sup>-1</sup> = Inverse of key matrix</p>
+            
+            <h3>Matrix Invertibility</h3>
+            <p>A key matrix is valid for decryption only if it has an inverse in the given modulus. This means:</p>
+            <ol>
+                <li>The determinant of the matrix must not be zero</li>
+                <li>The determinant must be coprime with the modulus (their greatest common divisor must be 1)</li>
+            </ol>
+            
+        </div>
+    </div>
+    <div class="footer">
+        <footer class="my-name">
+            <p>By @Jayesh and group</p>
+        </footer>
+    </div>
+    
+
+    <script src="script.js"> </script>
+</body>
+</html>
